@@ -14,7 +14,10 @@ class StateController extends Controller
      */
     public function index()
     {
-        return view('states.index');
+        $data = [
+            'Stati' => 'questi sono gli elementi della pagina'
+        ];
+        return view('states.index', $data);
     }
 
     /**
