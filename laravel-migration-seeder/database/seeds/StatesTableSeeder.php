@@ -1,7 +1,11 @@
 <?php
 
 use Illuminate\Database\Seeder;
+
 use \App\State;
+
+use Faker\Generator as Faker;
+
 
 class StatesTableSeeder extends Seeder
 {
@@ -10,41 +14,18 @@ class StatesTableSeeder extends Seeder
      *
      * @return void
      */
-    public function run()
+    public function run(Faker $faker)
     {
-        $States = [
-            [
-             'nome' => 'Inghilterra',
-             'language' => 'Inglese'
-            ],
-            [
-             'nome' => 'Italia',
-             'language' => 'Italiano'
-            ],
-            [
-             'nome' => 'Svezia',
-             'language' => 'Svedese'
-            ],
-            [
-             'nome' => 'Spagna',
-             'language' => 'Spagnolo'
-            ],
-            [
-             'nome' => 'Portogallo',
-             'language' => 'Portoghese'
-            ],
-            
-        ];
-        foreach ($States as $item) {
-            
-            $NewState =  new State();
-            $NewState->name = $item['nome'];
-            $NewState->population = rand(100000, 500000);
-            $NewState->size = 12.34;
-            $NewState->government = 'Repubblica';
-            $NewState->language = $item['language'];
 
-            $NewState->save();
+        for ($i = 0; $i < 10; $i++){
+            $newState = new State();
+            $newState->name = $faker->name;
+            $newState->population = $faker->unique()->randomDigitNotNull();
+            $newState->size = $faker->unique()->randomDigitNotNull();
+            $newState->language = $faker->name;
+            $newState->government = $faker->name;
+
+            $newState->save();
         }
     }
 }
