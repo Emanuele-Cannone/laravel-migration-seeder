@@ -16,14 +16,16 @@ class StatesTableSeeder extends Seeder
      */
     public function run(Faker $faker)
     {
+        $languages = ['inglese','frnacese','spagnolo','sardo', 'spagnolo', 'finlandese', 'coreano', 'napoletano', 'pugliese'];
+        $government = ['repubblica', 'stato federale', 'monarchia', 'unione', 'boh', 'altroboh', 'altroaltroboh', 'qualcosa', 'altro qualcosa', 'altro qualcosa ancora'];
 
         for ($i = 0; $i < 10; $i++){
             $newState = new State();
-            $newState->name = $faker->name;
-            $newState->population = $faker->unique()->randomDigitNotNull();
-            $newState->size = $faker->unique()->randomDigitNotNull();
-            $newState->language = $faker->name;
-            $newState->government = $faker->name;
+            $newState->name = $faker->state();
+            $newState->population = $faker->numberBetween(100000, 600000);
+            $newState->size = $faker->randomFloat(1, 100000, 200000);
+            $newState->language = array_rand($languages);
+            $newState->government = array_rand($government);
 
             $newState->save();
         }
